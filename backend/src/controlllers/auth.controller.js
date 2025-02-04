@@ -33,7 +33,7 @@ const generateAccessAndRefreshTokens = async (userId) => {
 
 // Register the User
 const register = asyncHandler(async (req, res) => {
-  const { fullName, email, password } = req.body;
+  const { fullName, email, password, role } = req.body;
   const { firstName, lastName } = fullName;
 
   if(
@@ -61,6 +61,7 @@ const register = asyncHandler(async (req, res) => {
     fullName,
     email,
     password,
+    role,
     avatar
   });
 

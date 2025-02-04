@@ -25,3 +25,15 @@ export const protect = asyncHandler(async (req, res, next) => {
         next(error);
     }
 });
+
+export const getAdmin = asyncHandler(async (req, res) => {
+    try {
+        if(req.user.role !== 'admin') {
+            throw new ApiError(401, 'Only Admins can access this resource');
+        }
+        
+        next();
+    } catch (error) {
+        next(error);
+    }
+});

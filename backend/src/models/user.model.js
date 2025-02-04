@@ -27,6 +27,12 @@ const userSchema = new Schema(
       required: true,
       trim: true
     },
+    role: {
+      type: String,
+      required: true,
+      enum: ['user', 'admin'],
+      default: 'user'
+    },
     avatar: {
       type: String
     },
@@ -57,6 +63,7 @@ userSchema.methods.generateAccessToken = async function () {
       _id: this._id,
       fullName: this.fullName,
       email: this.email,
+      role: this.role
     },
     process.env.ACCESS_TOKEN_SECRET,
     {
