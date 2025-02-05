@@ -32,4 +32,23 @@ const getCurrentUser = asyncHandler(async (req, res) => {
   )
 });
 
-export { getCurrentUser }
+const getAllUsers = asyncHandler(async (req, res) => {
+  const { userId } = req.user._id;
+
+  const users = await User.find({ _id: {$ne: userId} }); // To remove the current user from the list of users
+
+  if(!users || users.length === 0) {
+    throw new ApiError(404, 'No Users found');
+  }
+
+  return res
+  .status(200)
+  .json(
+    new ApiResponse(200, users, 'All Users fetched successfully')
+  )
+});
+
+export {
+  getCurrentUser,
+  getAllUsers
+}

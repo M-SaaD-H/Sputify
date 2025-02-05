@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { protect, getAdmin } from '../middlewares/auth.middleware';
-import { addSong, createAlbum, deleteAlbum, deleteSong } from "../controlllers/admin.controller";
+import { protect, getAdmin } from '../middlewares/auth.middleware.js';
+import { addSong, createAlbum, deleteAlbum, deleteSong } from "../controlllers/admin.controller.js";
 
 const router = Router();
 
