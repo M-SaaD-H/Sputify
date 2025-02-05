@@ -6,9 +6,7 @@ const router = Router();
 router.route('/').get(getAllSongs);
 router.route('/:id').get(getSongById);
 
-router.route('/featured').get(getRandomSongs);
-router.route('/made-for-you').get(getRandomSongs);
-router.route('/trending').get(getRandomSongs);
+router.route('/get-random-songs').get(getRandomSongs);
 
 
 export default router;
