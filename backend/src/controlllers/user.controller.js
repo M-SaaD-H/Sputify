@@ -10,7 +10,7 @@ const getCurrentUser = asyncHandler(async (req, res) => {
     throw new ApiError(404, 'Unauthorized request');
   }
   
-  const user = await User.findById(userId);
+  const user = await User.findById(userId).select('-password');
 
   if(!user) {
     throw new ApiError(404, 'User not found');

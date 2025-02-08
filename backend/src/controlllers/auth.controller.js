@@ -7,7 +7,7 @@ import { User } from '../models/user.model.js';
 // options for cookies
 const cookieOptions = {
   httpOnly: true,
-  secure: true
+  secure: process.env.NODE_ENV === 'production'
 };
 
 // Generate the access and refresh tokens for the users
@@ -15,8 +15,8 @@ const generateAccessAndRefreshTokens = async (userId) => {
   try {
     const user = await User.findById(userId);
 
-    const accessToken = user.generateAccessToken();
-    const refreshToken = user.generateRefreshToken();
+    const accessToken = await user.generateAccessToken();
+    const refreshToken = await user.generateRefreshToken();
 
     user.refreshToken = refreshToken;
 
@@ -33,11 +33,10 @@ const generateAccessAndRefreshTokens = async (userId) => {
 
 // Register the User
 const register = asyncHandler(async (req, res) => {
-  const { fullName, email, password, role } = req.body;
-  const { firstName, lastName } = fullName;
+  const { firstName, lastName, email, password, role } = req.body;
 
   if(
-    [firstName, lastName, email, password].some(field => field.trim() === "")
+    [firstName, email, password].some(field => field?.trim() === "")
   ) {
     throw new ApiError(404, 'All fields are required');
   }
@@ -58,7 +57,10 @@ const register = asyncHandler(async (req, res) => {
   const avatar = `https://api.dicebear.com/9.x/initials/svg?seed=${firstName.charAt(0)}${lastName.charAt(0)}&radius=50`;
 
   const user = await User.create({
-    fullName,
+    fullName: {
+      firstName,
+      lastName
+    },
     email,
     password,
     role,
@@ -82,9 +84,9 @@ const register = asyncHandler(async (req, res) => {
         user,
         accessToken,
         refreshToken
-      }
-    ),
-    'User registered successfully'
+      },
+      'User registered successfully'
+    )
   )
 });
 
@@ -112,7 +114,6 @@ const login = asyncHandler(async (req, res) => {
   }
 
   const { accessToken, refreshToken } = await generateAccessAndRefreshTokens(user._id);
-
   
   return res
   .status(200)
@@ -151,14 +152,6 @@ const logout = asyncHandler(async (req, res) => {
   .json(
       new ApiResponse(200, {}, "User loged out")
   )
-});
-
-const getCurrentUser = asyncHandler(async (req, res) => {
-  return res
-  .status(200)
-  .json(
-    new ApiResponse(200, req.user, "Current user fetched successfully")
-  );
 });
 
 const refreshAccessToken = asyncHandler(async(req, res) => {  // renew acces token -> (renew session)
@@ -257,7 +250,6 @@ export {
   register,
   login,
   logout,
-  getCurrentUser,
   refreshAccessToken,
   changePassword,
   updateAccountDetails
