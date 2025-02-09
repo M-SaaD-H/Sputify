@@ -10,12 +10,13 @@ function LoginForm() {
   const navigate = useNavigate();
   const [error, setError] = useState(null);
 
-  const { login } = useAuthStore();
+  const { login, setLoading } = useAuthStore();
 
   const { register, handleSubmit } = useForm();
 
   const loginHanlder = async (data) => {
     setError(null);
+    setLoading(true); // set loading to true
 
     try {
       const res = await axios.post('/auth/login', data);
@@ -26,6 +27,7 @@ function LoginForm() {
         login(user, user.isAdmin);
       }
 
+      setLoading(false); // set loading to false
       navigate('/');
     } catch (error) {
       console.log(error)

@@ -10,12 +10,13 @@ function SignupForm() {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
-  const { login } = useAuthStore();
+  const { login, setLoading } = useAuthStore();
 
   const { register, handleSubmit } = useForm();
 
   const singup = async (data) => {
     setError(null);
+    setLoading(true);
 
     try {
       const res = await axiosInstance.post('/auth/register', data);
@@ -26,6 +27,7 @@ function SignupForm() {
         login(user, user.isAdmin);
       }
 
+      setLoading(false);
       navigate('/');
     } catch (error) {
       console.log(error)

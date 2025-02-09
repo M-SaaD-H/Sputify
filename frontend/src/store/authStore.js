@@ -5,6 +5,7 @@ const authStore = (set) => ({
   user: null,
   status: false, // This is auth status -> user is logged in or not
   isAdmin: false,
+  isLoading: false,
   // Consider adding a loading state here
 
   login: (user, isAdmin) => {
@@ -29,7 +30,11 @@ const authStore = (set) => ({
     } catch (error) {
       console.log('Loggin out failed E:', error);
     }
-  }
+  },
+
+  setLoading: (loadingState) => set(state => ({
+    isLoading: loadingState
+  }))
 });
 
 const useAuthStore = create(
