@@ -11,11 +11,9 @@ function App() {
   }
 
   return (
-    <>
-    {/* Left Component */}
-    <Outlet />
-    {/* Right Component */}
-    </>
+    <div className='h-screen w-screen bg-black text-white flex flex-col'>
+      <Outlet />
+    </div>
   )
 }
 

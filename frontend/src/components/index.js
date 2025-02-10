@@ -5,6 +5,8 @@ import AuthLayout from './AuthLayout.jsx';
 import LoginForm from './LoginForm.jsx';
 import SignupForm from './SignupForm.jsx';
 
+import PlaylistSkeleton from './skeletons/PlaylistSkeleton.jsx';
+
 
 export {
   TopBar,
@@ -12,5 +14,7 @@ export {
   Input,
   AuthLayout,
   LoginForm,
-  SignupForm
+  SignupForm,
+
+  PlaylistSkeleton
 }

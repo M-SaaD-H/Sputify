@@ -1,12 +1,11 @@
-import { Input, LoadingCard, TopBar } from '@/components'
-import React, { useRef } from 'react'
+import React from 'react'
 
 function Home() {
   // const ref = useRef();
 
   return (
     <div>
-      <TopBar />
+      
     </div>
   )
 }
