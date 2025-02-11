@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client';
 import './index.css';
 import App from './App.jsx';
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom';
-import { Home, Login, Signup } from './pages/index.js'
+import { AlbumPage, Home, Login, Signup } from './pages/index.js'
 import Layout from './Layout';
 
 const router = createBrowserRouter(
@@ -11,6 +11,7 @@ const router = createBrowserRouter(
     <>
     <Route path='/' element={<Layout />}>
       <Route path='/' element={<Home />} />
+      <Route path='/album/:albumId' element={<AlbumPage />} />
     </Route>
     <Route path='/' element={<App />}>
       <Route path='/login' element={<Login />} />
