@@ -29,18 +29,10 @@ function AlbumPage() {
   }
 
   useEffect(() => {
-    console.log('songs =', songs);
-  }, [songs]);
-
-  useEffect(() => {
     if(albumId) {
       fetchAlbum();
     }
   }, [albumId])
-
-  useEffect(() => {
-    console.log('album =', album);
-  }, [album]);
   
   return (
     <div className='h-full w-full rounded-lg overflow-hidden'>
@@ -78,7 +70,7 @@ function AlbumPage() {
 								<div>#</div>
 								<div>Title</div>
 								{/* <div>Released Date</div> */}
-								<div>
+								<div className='ml-2'>
 									<Clock className='h-4 w-4' />
 								</div>
 							</div>

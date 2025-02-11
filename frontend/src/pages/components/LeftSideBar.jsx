@@ -18,13 +18,10 @@ function LeftSideBar() {
       try {
         setIsLoading(true);
 
-        const albumIds = '3BGU0BqGwBkYDHpfCWFm7I,1WwkojG9sjMSrFVz4D51W0,0Rkv5iqjF2uenfL0OVB8hg,1poClftP5T3zRcqpsxPPfW,5KF4xCxDD8ip003hoatFT9,5ZbqiWukRFxq8zwllvK3YT,3uuu6u13U0KeVQsZ3CZKK4'
+        const albumIds = '1WwkojG9sjMSrFVz4D51W0,10FLjwfpbxLmW8c25Xyc2N,013jUXOfDFXnDMBetTdsiH,7KIwUrSiA0gc9WlI7AYIfZ,4nZOPP0atfJbBlkedLYi7t,0a183xiCHiC1GQd8ou7WXO,0Rkv5iqjF2uenfL0OVB8hg,1poClftP5T3zRcqpsxPPfW,3BGU0BqGwBkYDHpfCWFm7I,5KF4xCxDD8ip003hoatFT9,5ZbqiWukRFxq8zwllvK3YT,3uuu6u13U0KeVQsZ3CZKK4'
 
         spotifyApi.get(`/albums/?ids=${albumIds}`) // This fetches albums using the Spoify's official API
-        .then(res => {
-          console.log('res =', res);
-          return res.data
-        })
+        .then(res => res.data)
         .then(data => setAlbums(data.albums));
 
         setIsLoading(false);
