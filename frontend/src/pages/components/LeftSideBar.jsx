@@ -71,7 +71,7 @@ function LeftSideBar() {
             </div>
           </Link>
         </div>
-        <ScrollArea className='h-[calc(100vh-370px)] w-full overflow-hidden space-y-2'>
+        <ScrollArea className='h-[calc(100vh-260px)] w-full overflow-hidden space-y-2'>
           {
             isLoading ? (
               <PlaylistSkeleton />

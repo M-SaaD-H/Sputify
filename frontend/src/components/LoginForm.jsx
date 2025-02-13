@@ -24,15 +24,16 @@ function LoginForm() {
       if(res) {
         const user = res.data.data.user;
 
-        login(user, user.isAdmin);
+        login(user, user.role === 'admin');
       }
 
-      setLoading(false); // set loading to false
       navigate('/');
     } catch (error) {
       console.log(error)
       setError(error.response?.data || error);
     }
+    
+    setLoading(false); // set loading to false
   }
 
   return (

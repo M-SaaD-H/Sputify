@@ -16,7 +16,6 @@ function Layout({ children }) {
 
   return (
     <div className='h-screen w-screen bg-black text-white flex flex-col'>
-      <TopBar />
       <ResizablePanelGroup direction='horizontal' className='flex flex-1 gap-1 h-full p-2 overflow-hidden'>
 
         {/* Left Side Component */}
@@ -28,6 +27,7 @@ function Layout({ children }) {
 
         {/* Main Component */}
         <ResizablePanel defaultSize={isMobile ? 80 : 60}>
+          <TopBar />
           <Outlet />
         </ResizablePanel>
 
